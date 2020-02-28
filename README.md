@@ -1,8 +1,8 @@
-# vue-music
+# 基于NeteaseCloudMusicApi的vue音乐播放器项目
 
-## Project setup
+## 项目技术栈
 ```
-npm install
+vue,vuex,vueRoter,scss
 ```
 
 ### Compiles and hot-reloads for development

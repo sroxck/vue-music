@@ -1,0 +1,226 @@
+// 初始化样式
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; // c3盒模型
+}
+html {
+  font-size:14px;
+}
+body {
+  font-family: Arial, Helvetica, sans-serif; //默认字体
+  line-height: 1.2rem; // 行高
+  background-color: #fafafa; // 背景主题颜色
+}
+p{
+  line-height: 1.4rem;
+}
+a{
+  color: rgba(26,26,26,1);
+  text-decoration: none;
+}
+
+// 定义主体颜色
+$colors: (
+  "primary": #db9e3f,
+  "white": #fff,
+  "info":rgba(34,213,156,1),
+  "light": #f9f9f9,
+  "grey": #999,
+  "dark": #222,
+  "black": #000,
+  "chinaRed":red,
+  "danger": rgb(192, 75, 75),
+);
+@each $colorkey,$color in $colors {
+  // 遍历对象,循环生成颜色类和背景颜色工具类
+  .text-#{$colorkey} {
+    color:#{$color};
+  }
+  .bg-#{$colorkey} {
+    background-color:#{$color};
+  }
+}
+
+// 文字对齐方式
+@each $var in (left,center,right) {
+  // 遍历数组,循环生成文字对齐方式工具类
+  .text-#{$var} {
+    text-align: $var ;
+  }
+}
+// 字体大小
+$base-font-size:1rem; //基准大小
+$font-sizes: (
+  ssm:0.7692, // 10px
+  sssm:0.6154, // 10px
+  sm: 0.9231, // 12px
+  md: 1, // 14px
+  lg: 1.2308, // 16px
+  xl: 1.3846, // 18px
+  xxl:1.5385 // 20px
+);
+@each $sizeKey,$size in $font-sizes { 
+  // 遍历对象,循环生成字体大小工具类
+  .fs-#{$sizeKey} {
+    font-size: $size * $base-font-size;
+  }
+}
+
+//文本一行显示,多于显示省略号
+.text-ellipsis {
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+//宽高百分比
+.w-100{
+  width: 100%;
+}
+.h-100{
+  height: 100%;
+}
+
+// 布局工具类
+.d-flex {
+  display: flex;
+}
+.flex-column {
+  flex-direction: column;
+}
+// 主轴元素对齐方式
+$flex-jc:(
+  start:flex-start,
+  end:flex-end,
+  center:center,
+  between:space-between,
+  around:space-around
+);
+@each $key,$value in $flex-jc {
+  // 遍历对象,循环生成flex主轴对齐工具类
+  .jc-#{$key} {
+    justify-content: $value;
+  }
+}
+// 副轴对齐方式
+$flex-ai:(
+  start: flex-start,
+  end: flex-end,
+  center: center,
+  stretch: stretch
+);
+@each $key, $value in $flex-ai {
+  .ai-#{$key} {
+    align-items: $value;
+  }
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+// 间距
+$spacing-type: ( // 类型
+  m: margin,
+  p:padding
+);
+$spacing-direction:( // 方向
+  t:top,
+  r:right,
+  b:bottom,
+  l:left
+);
+$spacing-base-size:1rem; // 基准大小
+
+$spacing-sizes:( // 间距大小
+  0: 0,
+  1: 0.25,
+  2: 0.5,
+  3: 1,
+  4: 1.5,
+  5: 3
+);
+// 循环生成间距工具类
+@each $typeKey,$type in $spacing-type { // 根据类型循环
+  //  m-1 p-1
+  @each $sizeKey,$size in $spacing-sizes { // 循环生成m 和 p 的上下左右间距大小
+    .#{$typeKey}-#{$sizeKey} {
+      #{$type}:$size * $spacing-base-size
+    }
+  }
+  // mx-1 py-1
+  @each $sizeKey,$size in $spacing-sizes { // 循环生成m 和 p 的上下和左右间距大小
+    .#{$typeKey}x-#{$sizeKey} { 
+      // 循环生成 .mx-1{margin-left:0.25rem,margin-right:0.25rem} 格式类
+      #{$type}-left:$size * $spacing-base-size;
+      #{$type}-right:$size * $spacing-base-size
+    }
+      // 循环生成 .my-1{margin-top:0.25rem,margin-bottom:0.25rem} 格式类
+    .#{$typeKey}y-#{$sizeKey} {
+      #{$type}-top: $size * $spacing-base-size;
+      #{$type}-bottom: $size * $spacing-base-size;
+    }
+  }
+  // mt pt mr pr ml pl mb pb 格式类
+  @each $directionKey,$direction in $spacing-direction { // 循环方位
+    @each $sizeKey,$size in $spacing-sizes { // 循环间距大小
+      // 循环生成 .mt-1{margin-top:0.25rem}
+      .#{$typeKey}#{$directionKey}-#{$sizeKey} {
+        #{$type}-#{$direction}: $size *  $spacing-base-size;
+      }
+    }
+  }
+}
+
+// 按钮样式 
+.btn {
+  border-radius: 0.1538rem;
+  font-size: map-get($font-sizes,'sm')* $base-font-size;
+  padding: 0.3rem 0.6rem;
+  height: 30px;
+  background-color: #ecf5ff;
+  border: 1px solid lightskyblue;
+  &.btn-lg {
+    background: map-get($colors, 'light');
+    border:1px solid #eccecc;
+    padding:0.6rem 0;
+  }
+  &.btn-sucess {
+    background: map-get($colors, 'primary');
+    border:1px solid #eccecc;
+    padding:0.6rem 0;
+  }
+  &.btn-danger {
+    background: map-get($colors, 'danger');
+    border:1px solid #eccecc;
+    padding:0.6rem 0;
+  }
+}
+
+// 边框
+$border-color:#d4d9de;
+@each $dir in (top,right,bottom,left) {
+  .border-#{$dir} {
+    border-#{$dir}:1px solid $border-color
+  }
+}
+
+// 阴影
+.shadow {
+  box-shadow:0 3px 25px rgba(0,0,0,.05)
+}
+// 卡片
+.m-card {
+  border-radius: 4px;
+  border: 1px solid #EBEEF5;
+  background-color: #FFF;
+  overflow: hidden;
+  color: #303133;
+  -webkit-transition: .3s;
+  transition: .3s;
+}
