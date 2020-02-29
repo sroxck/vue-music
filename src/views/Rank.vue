@@ -1,7 +1,8 @@
-<!--  -->
+<!--排行页面  -->
 <template>
   <div class="p-3 mt-2">
     <div class="top d-flex bg-white mb-3 " v-for="(item,index) in musicListTj" :key="index" @click="musicIn(index)">
+      <!-- 左边区域 -->
       <div class="top-left py-3 pl-3 flex-1">
         <h3 class="pb-2">{{item.name}}</h3>
         <ol>
@@ -10,15 +11,15 @@
           </li>
         </ol>
       </div>
+      <!-- 右边区域 -->
       <div class="top-right">
         <div class="top-content">
           <img :src="item.coverImgUrl" alt="" class="h-100">
+          <!-- 播放量 -->
           <div class="song-list-info px-2 ">
-                <i
-                  class="iconfont icon-bofangsanjiaoxing  text-white fs-ssm"
-                ></i>
-                <span class="fs-ssm text-white">{{item.playCount | localYi}}</span>
-              </div>
+              <i class="iconfont icon-bofangsanjiaoxing  text-white fs-ssm"></i>
+              <span class="fs-ssm text-white">{{item.playCount | localYi}}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -29,18 +30,18 @@
 export default {
   data () {
     return {
-      musicListTj: []
+      musicListTj: [] // 存放歌单详情信息
     }
   },
   created () {
-    this.getRank()
+    this.getRank() // 获取歌单
   },
   mounted () {},
   methods: {
-    async getRank () {
-      for (let i = 0; i < 20; i++) {
+    async getRank () { // 请求歌单并获取需求的数据
+      for (let i = 0; i < 12; i++) {
         const { data: res } = await this.$http.get(`/top/list?idx=${i}`)
-        const list = {
+        const list = { // 需要用到的数据
           playlist: res.playlist.tracks,
           description: res.playlist.description,
           coverImgUrl: res.playlist.coverImgUrl,

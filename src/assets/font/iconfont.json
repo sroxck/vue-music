@@ -25,6 +25,34 @@
       "font_class": "right",
       "unicode": "e6c6",
       "unicode_decimal": 59078
+    },
+    {
+      "icon_id": "1111470",
+      "name": "暂停",
+      "font_class": "zanting",
+      "unicode": "e656",
+      "unicode_decimal": 58966
+    },
+    {
+      "icon_id": "1301353",
+      "name": "爱心",
+      "font_class": "aixin",
+      "unicode": "e658",
+      "unicode_decimal": 58968
+    },
+    {
+      "icon_id": "7629048",
+      "name": "话筒",
+      "font_class": "huatong",
+      "unicode": "e6b2",
+      "unicode_decimal": 59058
+    },
+    {
+      "icon_id": "9697592",
+      "name": "rmvb",
+      "font_class": "icon_xinyong_xianxing_jijin-",
+      "unicode": "e634",
+      "unicode_decimal": 58932
     }
   ]
 }

@@ -5,16 +5,8 @@
     </transition>
   </div>
 </template>
-<script>
-export default {
-  data () {
-    return {
-      current: 0
-    }
-  }
-}
-</script>
 <style lang="scss">
+// 子路由过滤动效
 .v-enter{
  opacity: 0;
 }

@@ -18,8 +18,8 @@ p{
 a{
   color: rgba(26,26,26,1);
   text-decoration: none;
+  -webkit-tap-highlight-color:rgba(255,0,0,0);
 }
-
 // 定义主体颜色
 $colors: (
   "primary": #db9e3f,
@@ -58,7 +58,9 @@ $font-sizes: (
   md: 1, // 14px
   lg: 1.2308, // 16px
   xl: 1.3846, // 18px
-  xxl:1.5385 // 20px
+  xxl:1.5385, // 20px
+  xxxl:1.9231, // 25px
+  xxxxl:2.1538, // 28px
 );
 @each $sizeKey,$size in $font-sizes { 
   // 遍历对象,循环生成字体大小工具类
@@ -212,7 +214,10 @@ $border-color:#d4d9de;
 
 // 阴影
 .shadow {
-  box-shadow:0 3px 25px rgba(0,0,0,.05)
+  box-shadow:0 3px 25px rgba(0,0,0,.05);
+}
+.box-shadow {
+  box-shadow:0 3px 25px rgba(0,0,0,.25);
 }
 // 卡片
 .m-card {

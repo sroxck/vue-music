@@ -1,0 +1,63 @@
+.search {
+  border: 0;
+  width: 100%;
+  border-radius: 15px;
+  font-size: 15px;
+  outline: none;
+  &.active {
+    width: 80%;
+  }
+}
+
+.sea {
+  position: relative;
+}
+.pos {
+  position: absolute;
+  top: 20px;
+  left: 30px;
+}
+.song-list-box {
+  height: 7.6923rem;
+  width: 7.6923rem;
+  position: relative;
+  img {
+    height: 100%;
+  }
+  .song-list-info {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border-radius: 15px;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+}
+.divisionBox {
+  width: 215px ;
+  height: 125px;
+}
+.song-list {
+  overflow-x: scroll;
+  /* 解决ios手机页面滑动卡顿问题 */
+  -webkit-overflow-scrolling: touch;
+}
+.removeScroll {
+  overflow: hidden;
+  height: 10.3846rem;
+}
+.song-list-item img {
+  border-radius: 10px;
+}
+.searchBox {
+  position: absolute;
+  height: 500px;
+  width: 100%;
+  background-color: #fafafa;
+  z-index: 99;
+}
+.hot a {
+  border-radius: 20px;
+}
+.fot {
+  height:22px ;
+}

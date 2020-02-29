@@ -1,6 +1,6 @@
 <!-- 卡片组件 -->
 <template>
-  <div class="card py-3 mt-3 ">
+  <div class="card py-2 mt-3 ">
     <div class="card-header d-flex ai-center pb-3">
       <h3 class="fs-lg flex-1 ">{{ title }}</h3>
       <!-- 卡片的大标题 必传 -->

@@ -3,8 +3,8 @@
   <div>
     <div class="d-flex p-3 pb-2 ai-center border-bottom">
       <div class="logo"><img src="../assets/img/logo.svg" alt="" class="h-100"></div>
-      <div class="flex-1 pl-2 fs-lg">更多QQ音乐排行榜</div>
-      <router-link tag="div" to="/rank" class="backRank fs-sm text-grey">戳我查看</router-link>
+      <div class="flex-1 pl-2 fs-lg">{{Mpath === '/rank' ? '更多QQ音乐排行榜' : '更多精彩歌单' }}</div>
+      <router-link tag="div" :to="Mpath" class="backRank fs-sm text-grey">{{Mpath === '/rank' ? '戳我查看' : '返回首页' }}</router-link>
     </div>
     <section class="d-flex flex-column jc-center ai-center mt-3">
       <div class="imgbox mb-4">
@@ -15,7 +15,7 @@
         <p>更新时间: {{$store.state.info.trackUpdateTime | formdata}}</p>
       </div>
       <div>
-        <div class="iconfont icon-bofangsanjiaoxing fs-xxl bofang mt-3"></div>
+        <div class="iconfont icon-bofangsanjiaoxing fs-xxl bofang mt-3" ></div>
       </div>
     </section>
     <section class="px-3 pt-2">
@@ -38,21 +38,25 @@ export default {
   props: ['id'],
   data () {
     return {
+      Mpath: '/rank'
     }
   },
   async created () {
     if (this.$route.name === 'Info') {
       const { data: res } = await this.$http.get(`/top/list?idx=${this.id}`)
       this.$store.state.info = res.playlist
+      this.$store.state.tracks = res.playlist.tracks
     } else if (this.$route.name === 'MusicPlay') {
+      this.Mpath = '/'
       const { data: res } = await this.$http.get(`/playlist/detail?id=${this.id}`)
       this.$store.state.info = res.playlist
+      this.$store.state.tracks = res.playlist.tracks
     }
   },
   mounted () {},
   methods: {
     playMusic (id) {
-      this.$router.push('/music/' + id)
+      this.$router.push('/music/' + id) // 点击歌曲详情进入播放页
     }
   }
 }

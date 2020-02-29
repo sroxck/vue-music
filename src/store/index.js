@@ -5,8 +5,9 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    top: [],
-    info: []
+    top: [], // 用于存放排行榜歌单数
+    info: [], // 存放歌单详情
+    tracks: null
   },
   mutations: {
   },
