@@ -43,7 +43,8 @@ export default {
   },
   async created () {
     if (this.$route.name === 'Info') {
-      const { data: res } = await this.$http.get(`/top/list?idx=${this.id}`)
+      const { data: res } = await this.$http.get(`/playlist/detail?id=${this.id}`)
+      console.log(res);
       this.$store.state.info = res.playlist
       this.$store.state.tracks = res.playlist.tracks
     } else if (this.$route.name === 'MusicPlay') {
