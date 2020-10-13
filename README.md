@@ -3,13 +3,18 @@
 ## 项目描述
 1. 本项目是基于网易云音乐API的QQ音乐播放器(ヽﾐ ´∀｀ﾐノ＜)
 2. 本项目只完成了基础的页面模板和功能,适合刚刚开始学习vue的新人进行扩展练习
-3. 项目完全按照自己的想法实现的,没有参考任何资料,所以写的比较low,有很大优化空间
-4. 进来的同学请随手点个star,十分感谢Thanks♪(･ω･)ﾉ
+3. 进来的同学请随手点个star,十分感谢Thanks♪(･ω･)ﾉ
 
 ### 项目技术栈
 ```
 vue,vuex,vueRoter,scss,axios
 ```
+### 已完成功能
+1. 首页
+2. 歌单详情页
+3. 歌曲详情页
+4. 播放小组件(正在完善中)
+5. 搜索功能
 
 ### 网易云音乐APi
 [NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi)
