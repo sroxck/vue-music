@@ -185,6 +185,7 @@ $spacing-sizes:( // 间距大小
   font-size: map-get($font-sizes,'sm')* $base-font-size;
   padding: 0.3rem 0.6rem;
   height: 30px;
+  outline: none;
   background-color: #ecf5ff;
   border: 1px solid lightskyblue;
   &.btn-lg {

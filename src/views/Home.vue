@@ -6,12 +6,18 @@
         ref="searchRef"
         type="text"
         placeholder="搜索"
-        class=" w-100 py-2 search  text-center text-grey " @focus="searchMS" />
+        class=" w-100 py-2 search  text-center text-grey " @focus="searchMS" v-model="searchKeyword" @keydown.enter="searchMusic"/>
         <a href="#" class="ml-4" @click="searchBL" v-show="isSearch">取消</a>
+        <div class="mt-2" v-show="isSearch">
+          <p v-for="(item,index) in searchList" :key="index" @click="$router.push(`music/${item.id}`)" class="d-flex text-grey jc-between px-4 py-2 " style="backgroundColor:#fff" >
+            <span>{{item.name}}</span> 
+            <span>歌手:{{item.artists[0].name}}</span>
+          </p>
+        </div>
         <div class="searchBox"  v-show="isSearch">
           <h4 class="mx-3 py-3">热门搜索</h4>
           <div class="hot d-flex flex-wrap" >
-            <a href="#" class="bg-white px-2 mr-2 py-1 mb-3 fs-sm text-grey" v-for="(item,index) in hot" :key="index">{{item.first}}</a>
+            <a href="#" class="bg-white px-2 mr-2 py-1 mb-3 fs-sm text-grey" v-for="(item,index) in hot" @click="goMusicPlayer(item.first)" :key="index">{{item.first}}</a>
           </div>
         </div>
     </section>
@@ -88,16 +94,37 @@
 
 <script>
 export default {
+  watch: {
+    searchKeyword(val){
+      if(val ==''||val ==null||val ==undefined) return this.searchList = []
+      this.searchMusic(val)
+    }
+  },
   data () {
     return {
       musicList: [], // 用于存储官方歌单的数组
       darenList: [], // 存储达人歌单
       hot: [],
+      searchKeyword:'', // search keyword 
       divisionList: [],
-      isSearch: false
+      isSearch: false,
+      searchList:[]
     }
   },
   methods: {
+    async searchMusic(e){
+     let timer = setTimeout(async res1=>{
+      const res = await this.$http.get('/search', {
+        params: { 
+          type: 1,
+          limit:12,
+          keywords:this.searchKeyword
+        }
+      })
+      console.log(res);
+      this.searchList = res.data.result.songs
+     },100)
+    },
     async getMusicList () { // 请求歌单
       const res = await this.$http.get('/top/playlist/highquality', {
         params: { // 一次拿12条
@@ -136,9 +163,20 @@ export default {
     musicPlay (id) { // 点击歌单详情 跳转到播放页
       this.$router.push('/musicPlays/' + id)
     },
+    async goMusicPlayer (key) {
+      const res = await this.$http.get('/search', {
+        params: { 
+          type: 1,
+          limit:1,
+          keywords:key
+        }
+      })
+      this.$router.push(`music/${res.data.result.songs[0].id}`)
+    },
     async getHot () {
       const { data: res } = await this.$http.get('/search/hot')
       this.hot = res.result.hots
+      console.log(res);
     },
     searchMS () {
       const input = this.$refs.searchRef
@@ -148,6 +186,7 @@ export default {
     searchBL () {
       const input = this.$refs.searchRef
       this.isSearch = false
+      this.searchKeyword = ''
       input.classList.remove('active')
     }
   },

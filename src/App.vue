@@ -3,8 +3,19 @@
     <transition  mode="out-in">
       <router-view/>
     </transition>
+      <Player></Player>
+
   </div>
 </template>
+<script>
+import Player from './views/Player'
+
+export default {
+  components: {
+    Player
+  },
+}
+</script>
 <style lang="scss">
 // 子路由过滤动效
 .v-enter{
@@ -26,3 +37,4 @@
  transition: 0.2s;
 }
 </style>
+

@@ -31,14 +31,16 @@
         <a href="#" class="bg-info">下载歌曲</a>
       </div>
       <div>
-        <audio :src="musicUrl" ref="audio" ></audio>
+        <!-- <audio :src="musicUrl" ref="audio" ></audio> -->
       </div>
     </section>
   </div>
 </template>
 
 <script>
+import Bus from './Bus'
 export default {
+
   props: ['id'],
   data () {
     return {
@@ -59,11 +61,17 @@ export default {
     },
     bofang () {
       this.isBOF = false
-      this.$refs.audio.play()
+      this.$store.state.MusicName = this.songsInfo.name
+      this.$store.state.MusicUrl = this.musicUrl
+      this.$store.state.paly = true
+      console.log(this.$parent.$children[0]);
+      setTimeout(e=>{
+        this.$parent.$children[0].start()  
+      },100)  
     },
     zanting () {
       this.isBOF = true
-      this.$refs.audio.pause()
+      // this.$refs.audio.pause()
     },
     async getMSinfo () {
       const { data: res } = await this.$http.get('/song/detail?ids=' + this.id)
