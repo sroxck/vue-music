@@ -42,20 +42,8 @@ export default {
   mounted () {},
   methods: {
     async getRank () { // 请求歌单并获取需求的数据
-      for (let i = 0; i < 12; i++) {
-        const { data: res } = await this.$http.get(`/personalized?limit=12`)
+    const { data: res } = await this.$http.get(`/personalized?limit=12`)
         this.musicListTj = res.result
-
-        const list = { // 需要用到的数据
-          playlist: res.playlist.tracks,
-          description: res.playlist.description,
-          coverImgUrl: res.playlist.coverImgUrl,
-          name: res.playlist.name,
-          top3: res.playlist.tracks.splice(0, 3),
-          playCount: res.playlist.playCount
-        }
-        this.musicListTj.push(list)
-      }
     },
     musicIn (id) {
       this.$router.push('/info/' + id)
