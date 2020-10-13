@@ -72,6 +72,9 @@ export default {
     zanting () {
       this.isBOF = true
       // this.$refs.audio.pause()
+      setTimeout(e=>{
+        this.$parent.$children[0].zanting()  
+      },100)  
     },
     async getMSinfo () {
       const { data: res } = await this.$http.get('/song/detail?ids=' + this.id)
